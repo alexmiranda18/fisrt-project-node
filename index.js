@@ -18,18 +18,18 @@ const checkUserId = (request, response, next) => {
     userIndex = index
 
     next()
-}
+};
 
 const MethodUrl = (request, response, next) => {
     const method = request.method
     const url = request.path
     console.log(`Method:${method} URL: ${url}`)
     next()
-}
+};
 
 app.get('/command', MethodUrl, (request, response) => {
     return response.json(demand)
-})
+});
 
 app.post('/command', MethodUrl, (request, response) => {
     const { order, clientName, price, status } = request.body
@@ -38,7 +38,7 @@ app.post('/command', MethodUrl, (request, response) => {
 
     demand.push(orderClient)
     return response.status(201).json(orderClient)
-})
+});
 app.put('/command/:id', checkUserId, MethodUrl, (request, response) => {
     const id = request.userId
     const { order, clientName, price, status } = request.body
@@ -47,19 +47,19 @@ app.put('/command/:id', checkUserId, MethodUrl, (request, response) => {
     demand[userIndex] = updateOrder
 
     return response.json(updateOrder)
-})
+});
 app.delete('/command/:id', checkUserId, MethodUrl, (request, response) => {
 
     demand.splice(userIndex, 1)
     return response.status(204).json()
-})
+});
 
 
 app.get('/command/:id', checkUserId, MethodUrl, (request, response) => {
     const index = userIndex
 
     return response.json(demand[index])
-})
+});
 
 app.patch('/command/:id', checkUserId, MethodUrl, (request, response) => {
     const index = userIndex
@@ -67,8 +67,8 @@ app.patch('/command/:id', checkUserId, MethodUrl, (request, response) => {
     demand[index].status = "Pronto"
 
     return response.json(demand[index])
-})
+});
 
 app.listen(port, () => {
     console.log(`server started on port ${port}`)
-})
+});
