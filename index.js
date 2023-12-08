@@ -1,8 +1,10 @@
 const express = require('express')
 const uuid = require('uuid')
 const app = express()
-const port = 3000
+const port = 3001
+const cors = require('cors')
 app.use(express.json())
+app.use(cors())
 
 const demand = []
 const checkUserId = (request, response, next) => {
@@ -32,7 +34,7 @@ app.get('/command', MethodUrl, (request, response) => {
 });
 
 app.post('/command', MethodUrl, (request, response) => {
-    const { order, clientName, price, status } = request.body
+    const { order, clientName, price, status} = request.body
 
     const orderClient = { id: uuid.v4(), order, clientName, price, status }
 
