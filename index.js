@@ -1,7 +1,7 @@
 const express = require('express')
 const uuid = require('uuid')
 const app = express()
-const port = 3001
+const port = process.env.PORT || 3001
 const cors = require('cors')
 app.use(express.json())
 app.use(cors())
